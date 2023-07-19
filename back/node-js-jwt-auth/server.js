@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Route basique
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     res.json({ message: "Bienvenue sur l'application Gamesoft" })
 })
 
