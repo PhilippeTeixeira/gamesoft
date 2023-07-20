@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cd front && npm install @vue/cli vue-router vuex axios bootstrap jquery popper.js && cd ../back && npm install express sequelize mysql2 cors jsonwebtoken bcryptjs multer --save",
-    "start": "cd back/node-js-jwt-auth && node server.js && cd ../front && npm run serve && npm run build && npm run lint"
+    "postinstall": "cd back && npm install express sequelize mysql2 cors jsonwebtoken bcryptjs multer --save",
+    "start": "cd back/node-js-jwt-auth && node server.js"
   },
   "keywords": [],
   "author": "",
