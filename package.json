@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "cd back && npm install express sequelize mysql2 cors jsonwebtoken bcryptjs multer --save",
-    "start": "cd back/node-js-jwt-auth && node server.js"
+    "start": "cd back/node-js-jwt-auth && node server.js && cd.. && cd.. && "
   },
   "keywords": [],
   "author": "",
