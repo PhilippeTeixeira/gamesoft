@@ -32,7 +32,7 @@ const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
     routes: [
         {
-            path: '/home',
+            path: '/',
             name: 'HomePage',
             component: HomePage
         },
@@ -71,7 +71,7 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app')
 
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/home', '/signin', '/signup', '/games', '/incoming'];
+    const publicPages = ['/', '/signin', '/signup', '/games', '/incoming'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('user');
   

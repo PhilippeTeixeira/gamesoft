@@ -2,7 +2,7 @@
   <div class="container p-0">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <router-link to="/home" class="navbar-brand d-flex align-items-center"><img src="../assets/logo.png" width="50"
+        <router-link to="/" class="navbar-brand d-flex align-items-center"><img src="../assets/logo.png" width="50"
             height="50" alt="logo gamesoft" class="rounded-circle" />
           <h1 class="mx-2" style="font-size: 2rem;">Gamesoft</h1>
         </router-link><span class="m-auto" style="font-style:italic;">Le studio de jeu vidéo RPG 100% français !</span>
@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link to="/home" class="nav-link active" aria-current="page">Accueil</router-link>
+            <router-link to="/" class="nav-link active" aria-current="page">Accueil</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/games" class="nav-link">Nos jeux</router-link>
@@ -65,7 +65,7 @@ export default {
   methods: {
     UserLogout() {
       this.$store.dispatch('auth/logout').then(() => {
-        this.$router.push('/home')
+        this.$router.push('/')
       },
         (error) => {
           this.message =
