@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "serve": "cd front && vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "build": "cd front && vue-cli-service build",
+    "lint": "cd front && vue-cli-service lint",
     "start": "node index.js"
   },
   "keywords": [],
