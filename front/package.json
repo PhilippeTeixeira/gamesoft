@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "node index.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -18,8 +19,10 @@
     "bootstrap-vue": "^2.23.1",
     "bootstrap-vue-helper-json": "^1.1.1",
     "core-js": "^3.8.3",
+    "express": "^4.18.2",
     "jquery": "^3.7.0",
     "popper.js": "^1.16.1",
+    "serve-static": "^1.15.0",
     "store": "^2.0.12",
     "vee-validate": "^4.10.3",
     "vue": "^3.2.13",
