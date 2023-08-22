@@ -17,6 +17,7 @@
 import HeaderComponent from "../components/HeaderComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import GameElement from "../components/GameElement.vue";
+import GameService from '../services/game.service'
 
 export default {
   beforeCreate: function () {
@@ -30,20 +31,30 @@ export default {
   },
   data() {
     return {
-      elements: [
-        { title: "titre 1", description: "description 1" },
-        { title: "titre 2", description: "description 2" },
-        { title: "titre 3", description: "description 3" },
-        { title: "titre 4", description: "description 4" },
-        { title: "titre 5", description: "description 5" },
-        { title: "titre 6", description: "description 6" },
-        { title: "titre 7", description: "description 7" },
-        { title: "titre 8", description: "description 8" },
-        { title: "titre 9", description: "description 9" },
-        { title: "titre 10", description: "description 10" }
-      ]
+      elements: []
     }
-  }
+  },
+  methods: {
+    getGamesList() {
+            GameService.getGamesList().then(response => {
+                for (let element of response.data.games) {
+                    this.elements.push({ title: element.title, description: element.description })
+                    //console.log(this.elements)
+                }
+            })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        refreshGamesList() {
+            this.elements = []
+            this.getGamesList()
+        }
+  },
+  mounted() {
+        this.getGamesList()
+
+    }
 };
 </script>
 

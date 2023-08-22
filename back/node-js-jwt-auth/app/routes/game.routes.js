@@ -1,4 +1,5 @@
 const { verifyGame } = require("../middleware")
+const { authJwt } = require("../middleware")
 const controller = require("../controllers/game.controller")
 
 module.exports = function(app) {
@@ -12,7 +13,7 @@ module.exports = function(app) {
 
     app.post(
         "/api/game/addgame",
-        verifyGame.checkDuplicateGame,
+        [authJwt.verifyToken, ( authJwt.isAdmin || authJwt.isProducer ), verifyGame.checkDuplicateGame],
         controller.addGame
     )
 

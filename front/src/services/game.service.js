@@ -1,4 +1,5 @@
 import axios from 'axios'
+import authHeader from './auth-header'
 
 const API_URL = 'http://localhost:8080/api/game/'
 
@@ -19,7 +20,7 @@ class GameService {
             status: game.status,
             typeOfGame: game.typeOfGame,
             numberOfPlayers: game.numberOfPlayers
-        }).then(response => {
+        },{ headers: authHeader()}).then(response => {
             return response.data
         })
     }
