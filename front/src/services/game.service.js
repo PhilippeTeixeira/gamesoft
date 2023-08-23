@@ -30,6 +30,12 @@ class GameService {
             return response
         })
     }
+    getIncomingGamesList() {
+        return axios
+        .get(API_URL + "incominggameslist").then(response => {
+            return response
+        })
+    }
 }
 
 export default new GameService()

@@ -21,4 +21,8 @@ module.exports = function(app) {
         "/api/game/gameslist",
         controller.getGameSList
     )
+    app.get(
+        "/api/game/incominggameslist",
+        controller.getIncomingGamesList
+    )
 }

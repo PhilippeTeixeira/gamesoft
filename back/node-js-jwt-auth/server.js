@@ -71,62 +71,13 @@ const db = require("./app/models")
 const Role = db.role
 
 // pour la production : remplacer ci-dessous par db.sequelize.sync()
+const Dbinit = require("./app/config/initdb")
 const User = db.user
 const Game = db.game
 const Op = db.Sequelize.Op
 db.sequelize.sync({force: true}).then(() => {
     console.log('Efface et resynchronise la BDD')
-    initial()
+    Dbinit.initial()
 })
 
 var bcrypt = require("bcryptjs")
-
-function initial() {
-    Role.create({
-        id: 1,
-        name: "user"
-    })
-
-    Role.create({
-        id: 2,
-        name: "admin"
-    })
-
-    Role.create({
-        id: 3,
-        name: "producer"
-    })
-
-    Role.create({
-        id: 4,
-        name: "community_manager"
-    })
-    User.create({
-        username: 'admin',
-        email: 'admin@gmail.com',
-        password: bcrypt.hashSync('123456789', 8),
-    }).then(user => {
-        Role.findAll({
-            where: {
-                name: 'admin'
-            }
-        }).then(roles => {
-            user.setRoles(2)
-        })
-    })
-    Game.create({
-        title: "Demonio",
-        description: "The greatest game",
-        studioName: "Gamesoft",
-        pictures: "./front/src/assets/demonio_background.jpg",
-        plateforms: "PC",
-        priority: "5",
-        score: "0",
-        gameEngine: "Unreal Engine",
-        releaseDate: "2024-12-31",
-        budget: "20000",
-        status: "En développement",
-        typeOfGame: "RPG",
-        numberOfPlayers: "2"
-    })
-}

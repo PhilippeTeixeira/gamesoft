@@ -37,6 +37,22 @@ exports.getGameSList = (req, res) => {
              games
         })
     }).catch(err => {
-        res.status(500).send({ message: err.message})
+        res.status(500).send({ message: err.message })
+    })
+}
+
+exports.getIncomingGamesList = (req, res) => {
+    var gamesList = []
+    Game.findAll({
+        where: { status: "En développement" }
+    }).then((games) => {
+        for (let game of games) {
+            gamesList.push(game)
+        }
+        res.status(200).send({
+            games
+        })
+    }).catch(err => {
+        res.status(500).send({ message: err.message })
     })
 }
