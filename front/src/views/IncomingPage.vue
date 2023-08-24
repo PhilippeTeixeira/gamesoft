@@ -3,8 +3,12 @@
     <HeaderComponent />
     <div class="container">
       <div class="row justify-content-center bg-dark bg-opacity-75 p-4">
-        <GameElement v-for="element in elements" :key="element.name" :title="element.title"
-          :description="element.description" />
+        <GameElement v-for="element in elements" 
+        :key="element.name" 
+        :title="element.title"
+        :description="element.description"
+        :status="element.status"
+        />
       </div>
     </div>
     <FooterComponent />
@@ -36,7 +40,8 @@ export default {
     getGamesList() {
       GameService.getIncomingGamesList().then(response => {
         for (let element of response.data.games) {
-          this.elements.push({ title: element.title, description: element.description })
+          if (element.status == "En production") { element.status = "Disponible" }
+          this.elements.push({ title: element.title, description: element.description, status: element.status })
           //console.log(this.elements)
         }
       })
