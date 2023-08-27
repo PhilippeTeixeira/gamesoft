@@ -87,4 +87,7 @@ ul>a>li.active {
     background-color: #f8f9fa;
     color:  #212529 
 }
+ul>a>li {
+    color: #f8f9fa;
+}
 </style>
