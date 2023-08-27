@@ -1,5 +1,5 @@
 <template>
-    <div class="container border-top">
+    <div class="container">
         <div class="row mt-2">
             <AddGame/>
         </div>

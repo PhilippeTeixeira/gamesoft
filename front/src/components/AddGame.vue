@@ -1,9 +1,11 @@
 <template>
     <div class="container">
-        <div class="row d-flex justify-content-between mb-2">
-            <h2 class="w-50">Liste des jeux</h2>
-            <button id="btnAddGame" class="btn btn-outline-light col-2" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Ajouter un jeu</button>
+        <div class="row d-flex  mb-2 text-dark">
+            <h2 class="text-center">Liste des jeux</h2>
+            <div class="d-flex justify-content-end">
+                <button id="btnAddGame" class="btn btn-outline-dark col-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Ajouter un jeu</button>
+            </div>
         </div>
 
         <div class="accordion accordion-flush" id="addGame">
