@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div class="row mt-2">
+    <div class="container pt-2 pb-5">
+        <div class="row">
             <AddGame/>
         </div>
         <table class="table table-striped">
@@ -9,6 +9,7 @@
                     <th>Nom du jeu</th>
                     <th>Date de production</th>
                     <th>Score d'intérêt</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center d-flex">
-            <div class="container d-flex col-12 bg-light p-0" style="min-height:70vh; height: auto;">
+            <div class="container d-flex col-12 bg-light shadow p-0" style="min-height:70vh; height: auto;">
                 <div class="container col-2 bg-dark p-0">
                     <nav class="navbar bg-dark text-white p-0">
                         <ul class="navbar-nav col-12 font-weight-bold">
@@ -79,8 +79,9 @@ export default {
 <style>
 ul>a:hover {
     background-color: #f8f9fa;
+    color: #212529;
 }
-ul>a:hover {
+ul>a:hover li{
     color: #212529;
 }
 ul>a>li.active {

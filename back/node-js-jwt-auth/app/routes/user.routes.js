@@ -32,4 +32,14 @@ module.exports = function(app) {
         [authJwt.verifyToken, authJwt.isCommunityManager],
         controller.CMBoard
     )
+    app.put(
+        "/api/test/update/:id",
+        [authJwt.verifyToken],
+        controller.update
+    )
+    app.put(
+        "/api/test/changepwd/:id",
+        [authJwt.verifyToken],
+        controller.changePassword
+    )
 }
