@@ -21,6 +21,7 @@ import GamesPage from './views/GamesPage.vue'
 import IncomingPage from './views/IncomingPage.vue'
 import SigninPage from './views/SigninPage.vue'
 import SignupPage from './views/SignupPage.vue'
+import ModifyGamePage from './views/ModifyGamePage.vue'
 
 library.add(faHome,faUser, faUserPlus, faSignInAlt, faSignOutAlt)
 
@@ -60,6 +61,12 @@ const router = VueRouter.createRouter({
             path: '/account',
             name: 'AccountPage',
             component: () => import('./views/AccountPage.vue')
+        },
+        {
+        path: '/modifygame/:title',
+        name: 'ModifyGamePage',
+        component: ModifyGamePage,
+        props: true
         }
     ]
 })

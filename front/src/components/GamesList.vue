@@ -16,7 +16,6 @@
             <tbody>
                 <GamesListElement v-for="element in elements" :key="element.name" :title="element.title"
                     :releaseDate="element.releaseDate" :score="element.score" />
-
             </tbody>
         </table>
     </div>
@@ -62,3 +61,7 @@ export default {
     }
 }
 </script>
+
+<style>
+
+</style>
