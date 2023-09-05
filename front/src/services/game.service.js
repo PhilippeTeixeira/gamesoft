@@ -36,6 +36,12 @@ class GameService {
             return response
         })
     }
+    getGameData(title) {
+        return axios
+        .get(API_URL + "gamedata/" + title, { headers: authHeader()}).then(response => {
+            return response
+        })
+    }
 }
 
 export default new GameService()

@@ -25,4 +25,9 @@ module.exports = function(app) {
         "/api/game/incominggameslist",
         controller.getIncomingGamesList
     )
+    app.get(
+        "/api/game/gamedata/:title",
+        [authJwt.verifyToken, ( authJwt.isAdmin || authJwt.isProducer )],
+        controller.getGameData
+    )
 }
