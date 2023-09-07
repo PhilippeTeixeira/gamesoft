@@ -131,6 +131,7 @@ export default {
             submitted: false,
             successful: false,
             message: '',
+            loading: false,
             schema
         }
     },
