@@ -42,6 +42,13 @@ class GameService {
             return response
         })
     }
+    modifyGame(title, modifData, dataName){
+        return axios
+        .post(API_URL + "modifygame/" + title , [modifData, dataName], { headers: authHeader()})
+        .then(response => {
+            return response
+        })
+    }
 }
 
 export default new GameService()

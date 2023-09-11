@@ -1,10 +1,9 @@
 <template>
   <div class="d-flex justify-content-center">
-    <Form
+    <div
       id="modifygameform"
       class="bg-light text-dark col-10 col-md-8 p-4 rounded"
       name="form"
-      @submit="modifyGame"
       :validation-schema="schema"
     >
       <h2 class="text-center mb-4">Modifier un jeu</h2>
@@ -15,115 +14,203 @@
       </div>
       <div class="form-group mb-4">
         <label for="description">Description :</label>
-        <Field
-          name="description"
-          id="descriptionInput"
-          type="text"
-          class="form-control"
-          v-model="description"
-        />
-        <ErrorMessage name="description" class="text-danger" />
+        <div v-if="!modifyDescription" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ description }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyDescription = true ; focusField = true">
+              Modifier
+            </button>
+          </div>
+        </div>
+        <Form v-if="modifyDescription">
+          <div class="d-flex">
+            <Field
+              name="description"
+              id="descriptionInput"
+              type="text"
+              class="form-control bg-warning"
+              v-model="description"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="description" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
         <label for="plateforms">Plateforme (PC et/ou Xboite) :</label>
-        <Field
-          name="plateforms"
-          id="plateformsInput"
-          type="text"
-          class="form-control"
-          v-model="plateforms"
-        />
-        <ErrorMessage name="plateforms" class="text-danger" />
+        <div v-if="!modifyPlateforms" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ plateforms }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyPlateforms = true ; focusField = true">
+              Modifier
+            </button>
+          </div>
+        </div>
+        <Form v-if="modifyPlateforms">
+          <div class="d-flex">
+            <Field
+              name="plateforms"
+              id="plateformsInput"
+              type="text"
+              class="form-control bg-warning"
+              v-model="plateforms"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="plateforms" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
         <label for="priority">Priorité de développement :</label>
-        <Field
-          name="priority"
-          id="priorityInput"
-          type="number"
-          class="form-control"
-          v-model="priority"
-        />
-        <ErrorMessage name="priority" class="text-danger" />
+        <div v-if="!modifyPriority" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ priority }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyPriority=true; focusField = true">Modifier</button>
+          </div>
+        </div>
+        <Form v-if="modifyPriority">
+          <div class="d-flex">
+            <Field
+              name="priority"
+              id="priorityInput"
+              type="number"
+              class="form-control bg-warning"
+              v-model="priority"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="priority" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
-        <label for="gameEngine"
-          >Moteur du jeu (Unreal Engine, Unity ou CryEngine) :</label
-        >
-        <Field
-          name="gameEngine"
-          id="gameEngineInput"
-          type="text"
-          class="form-control"
-          v-model="gameEngine"
-        />
-        <ErrorMessage name="gameEngine" class="text-danger" />
+        <label for="gameEngine">Moteur du jeu (Unreal Engine, Unity ou CryEngine) :</label>
+        <div v-if="!modifyGameEngine" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ gameEngine }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyGameEngine=true; focusField = true">Modifier</button>
+          </div>
+        </div>
+        <Form v-if="modifyGameEngine">
+          <div class="d-flex">
+            <Field
+              name="gameEngine"
+              id="gameEngineInput"
+              type="text"
+              class="form-control bg-warning"
+              v-model="gameEngine"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="gameEngine" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
         <label for="releaseDate">Date de sortie estimée du jeu :</label>
-        <Field
-          name="releaseDate"
-          id="releaseDateInput"
-          type="date"
-          class="form-control"
-          v-model="releaseDate"
-        />
-        <ErrorMessage name="releaseDate" class="text-danger" />
+        <div v-if="!modifyRealeaseDate" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ releaseDate }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyRealeaseDate=true; focusField = true">Modifier</button>
+          </div>
+        </div>
+        <Form v-if="modifyRealeaseDate">
+          <div class="d-flex">
+            <Field
+              name="releaseDate"
+              id="releaseDateInput"
+              type="date"
+              class="form-control bg-warning"
+              v-model="releaseDate"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="releaseDate" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
         <label for="budget">Budget alloué au jeu (en €) :</label>
-        <Field
-          name="budget"
-          id="budgetInput"
-          type="number"
-          class="form-control"
-          v-model="budget"
-        />
-        <ErrorMessage name="budget" class="text-danger" />
+        <div v-if="!modifyBudget" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ budget }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyBudget=true; focusField = true">Modifier</button>
+          </div>
+        </div>
+        <Form v-if="modifyBudget">
+          <div class="d-flex">
+            <Field
+              name="budget"
+              id="budgetInput"
+              type="number"
+              class="form-control bg-warning"
+              v-model="budget"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="budget" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
         <label for="status">Statut du jeu (en production ou en développement) :</label>
-        <Field
-          name="status"
-          id="statusInput"
-          type="text"
-          class="form-control"
-          v-model="status"
-        />
-        <ErrorMessage name="status" class="text-danger" />
+        <div v-if="!modifyStatus" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ status }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyStatus=true; focusField = true">Modifier</button>
+          </div>
+        </div>
+        <Form v-if="modifyStatus">
+          <div class="d-flex">
+            <Field
+              name="status"
+              id="statusInput"
+              type="text"
+              class="form-control bg-warning"
+              v-model="status"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="status" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
         <label for="typeOfGame">Type de jeu (RPG, MMO, Aventure...) :</label>
-        <Field
-          name="typeOfGame"
-          id="typeOfGameInput"
-          type="text"
-          class="form-control"
-          v-model="typeOfGame"
-        />
-        <ErrorMessage name="typeOfGame" class="text-danger" />
+        <div v-if="!modifyTypeOfGame" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ typeOfGame }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyTypeOfGame=true; focusField = true">Modifier</button>
+          </div>
+        </div>
+        <Form v-if="modifyTypeOfGame">
+          <div class="d-flex">
+            <Field
+              name="typeOfGame"
+              id="typeOfGameInput"
+              type="text"
+              class="form-control bg-warning"
+              v-model="typeOfGame"
+            /><button class="btn btn-success ms-2">Valider</button>
+          </div>
+          <ErrorMessage name="typeOfGame" class="text-danger" />
+        </Form>
       </div>
       <div class="form-group mb-4">
         <label for="numberOfPlayers">Nombre de joueurs :</label>
-        <Field
-          name="numberOfPlayers"
-          id="numberOfPlayersInput"
-          type="text"
-          class="form-control"
-          v-model="numberOfPlayers"
-        />
-        <ErrorMessage name="numberOfPlayers" class="text-danger" />
+        <div v-if="!modifyNumberOfPlayers" class="card">
+          <div class="p-2 d-flex justify-content-between">
+            <div>{{ numberOfPlayers }}</div>
+            <button v-if="!focusField" class="btn btn-warning" @click="modifyNumberOfPlayers=true; focusField = true">Modifier</button>
+          </div>
+        </div>
+        <Form v-if="modifyNumberOfPlayers">
+          <div class="d-flex">
+            <Field
+              name="numberOfPlayers"
+              id="numberOfPlayersInput"
+              type="text"
+              class="form-control bg-warning"
+              v-model="numberOfPlayers"
+            /><button class="btn btn-success ms-2" @click="modifyGame(numberOfPlayers)">Valider</button>
+          </div>
+          <ErrorMessage name="numberOfPlayers" class="text-danger" />
+        </Form>
       </div>
       <div class="d-flex justify-content-center mb-4">
-        <button class="btn btn-outline-dark m-2" :disabled="loading" type="submit">
-          <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-          Enregistrer les modifications
-        </button>
-        <router-link to="/account"
-          ><button class="btn btn-danger m-2">Annuler</button></router-link
-        >
+        <router-link to="/account">
+          <button class="btn btn-outline-dark m-2">Revenir à la liste des jeux</button>
+        </router-link>
       </div>
-    </Form>
+    </div>
   </div>
 </template>
 
@@ -158,12 +245,25 @@ export default {
       status: yup.string().required("Veuillez remplir ce champ !"),
       typeOfGame: yup.string().required("Veuillez remplir ce champ !"),
       numberOfPlayers: yup.string().required("Veuillez remplir ce champ !"),
-    })
+    });
     return {
       submitted: false,
       successful: false,
       message: "",
       loading: false,
+
+      focusField: false,
+
+      modifyDescription: false,
+      modifyPlateforms: false,
+      modifyPriority: false,
+      modifyGameEngine: false,
+      modifyRealeaseDate: false,
+      modifyBudget: false,
+      modifyStatus: false,
+      modifyTypeOfGame: false,
+      modifyNumberOfPlayers: false,
+
       description: this.description,
       plateforms: this.plateforms,
       priority: this.priority,
@@ -173,8 +273,9 @@ export default {
       status: this.status,
       typeOfGame: this.typeOfGame,
       numberOfPlayers: this.numberOfPlayers,
+
       schema,
-    }
+    };
   },
   computed: {
     currentUser() {
@@ -211,12 +312,12 @@ export default {
           console.log(err);
         });
     },
-    modifyGame(title) {
-      console.log("je suis la fonction modifyGame et je suis déclenché !")
-      this.message = ""
-      this.successful = false
-      this.loading = true
-      GameService.modifyGame(title).then(
+    modifyGame(title, modifData, dataName) {
+      console.log("je suis la fonction modifyGame et je suis déclenché ! Et mon titre est : " + title + "mon nom de variable est : " + dataName);
+      this.message = "";
+      this.successful = false;
+      this.loading = true;
+      GameService.modifyGame(title, modifData, dataName).then(
         (data) => {
           this.submitted = true;
           this.successful = true;
@@ -240,8 +341,6 @@ export default {
             (error.response && error.response.data) || error.message || error.toString();
           this.successful = false;
           this.loading = false;
-          const form = document.getElementById("addgameform");
-          HTMLFormElement.prototype.reset.call(form);
           setTimeout(() => {
             this.message = "";
           }, 5000);
