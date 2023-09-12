@@ -45,6 +45,11 @@ export default {
         GamesList,
         AccountView
     },
+    props: {
+        setCurrentTab: {
+            type: String
+        }
+    },
     data() {
         return {
             currentTab:'AccountView',
@@ -59,7 +64,20 @@ export default {
         if (!this.currentUser) {
             this.$router.push('/signin');
         }
-
+        console.log(this.setCurrentTab)
+        if (this.setCurrentTab) {
+            let tab 
+            if(this.setCurrentTab == 'GamesList') {
+                tab = '2'
+                this.currentTab = 'GamesList'
+            }
+            else {
+                tab = '1'
+                this.currentTab = 'AccountView'
+            }
+            console.log("ma tab est :" +tab+" et mon currentTab est : " +this.currentTab)
+            this.toggleTab(tab)
+        }
     },
     methods: {
         toggleTab(selection) {

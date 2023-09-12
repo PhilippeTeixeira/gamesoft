@@ -22,6 +22,7 @@ import IncomingPage from './views/IncomingPage.vue'
 import SigninPage from './views/SigninPage.vue'
 import SignupPage from './views/SignupPage.vue'
 import ModifyGamePage from './views/ModifyGamePage.vue'
+import AccountPage from './views/AccountPage.vue'
 
 library.add(faHome,faUser, faUserPlus, faSignInAlt, faSignOutAlt)
 
@@ -58,9 +59,10 @@ const router = VueRouter.createRouter({
             component: SignupPage
         },
         {
-            path: '/account',
+            path: '/account/:setCurrentTab',
             name: 'AccountPage',
-            component: () => import('./views/AccountPage.vue')
+            component: AccountPage,
+            props: true
         },
         {
         path: '/modifygame/:title',

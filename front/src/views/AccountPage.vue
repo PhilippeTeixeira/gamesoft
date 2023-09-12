@@ -8,7 +8,7 @@
                 </h3>
             </header>
         </div>
-        <AdminDashboard v-if="showAdminBoard" />
+        <AdminDashboard v-if="showAdminBoard" v-bind:setCurrentTab="setCurrentTab" />
     </div>
     <FooterComponent />
 </template>
@@ -20,6 +20,11 @@ import AdminDashboard from "../components/AdminDashboard.vue"
 
 export default {
     name: 'AccountPage',
+    props: {
+        setCurrentTab: {
+            type: String
+        }
+    },
     components: {
         HeaderComponent,
         FooterComponent,
@@ -41,6 +46,7 @@ export default {
         if (!this.currentUser) {
             this.$router.push('/signin');
         }
+        console.log("Je suis dans AccountPage et ma valeur est : " + this.setCurrentTab )
     }
 };
 </script>

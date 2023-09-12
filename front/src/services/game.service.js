@@ -44,7 +44,7 @@ class GameService {
     }
     modifyGame(title, modifData, dataName){
         return axios
-        .post(API_URL + "modifygame/" + title , [modifData, dataName], { headers: authHeader()})
+        .post(API_URL + "modifygame/" + title , [dataName, modifData], { headers: authHeader()})
         .then(response => {
             return response
         })

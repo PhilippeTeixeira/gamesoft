@@ -34,7 +34,7 @@
                 <div data-bs-toggle="dropdown" class="dropdown-toggle user-action d-flex align-items-center btn btn-outline-light ps-2 pe-2 pt-0 pb-1" type="button"><i class="bi bi-person-circle rounded-circle me-2" style="font-size: 2rem;"></i> {{ this.currentUser.username }}
                   <b class="caret"></b></div>
                 <ul class="dropdown-menu text-center">
-                  <router-link to="/account"><li class="list-group-item"><i class="fa fa-user-o"></i> Mon compte</li></router-link>
+                  <router-link :to="{ name: 'AccountPage', params: { setCurrentTab: 'AccountView' } }"><li class="list-group-item"><i class="fa fa-user-o"></i> Mon compte</li></router-link>
                   <li class="divider"></li>
                   <li><a href="#"><button class="btn btn-danger text-white" @click.prevent="UserLogout"><i
                           class="material-icons">&#xE8AC;</i> Logout</button></a></li>

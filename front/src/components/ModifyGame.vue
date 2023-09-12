@@ -200,13 +200,13 @@
               type="text"
               class="form-control bg-warning"
               v-model="numberOfPlayers"
-            /><button class="btn btn-success ms-2" @click="modifyGame(numberOfPlayers)">Valider</button>
+            /><button type="button" class="btn btn-success ms-2" @click.prevent="modifyGame(numberOfPlayers, 'numberOfPlayers')">Valider</button>
           </div>
           <ErrorMessage name="numberOfPlayers" class="text-danger" />
         </Form>
       </div>
       <div class="d-flex justify-content-center mb-4">
-        <router-link to="/account">
+        <router-link :to="{ name: 'AccountPage', params: { setCurrentTab: 'GamesList' } }">
           <button class="btn btn-outline-dark m-2">Revenir à la liste des jeux</button>
         </router-link>
       </div>
@@ -286,6 +286,7 @@ export default {
     if (!this.currentUser) {
       this.$router.push("/signin");
     }
+    console.log("props : " + this.title)
   },
   created() {
     this.getGameData(this.title);
@@ -312,12 +313,12 @@ export default {
           console.log(err);
         });
     },
-    modifyGame(title, modifData, dataName) {
-      console.log("je suis la fonction modifyGame et je suis déclenché ! Et mon titre est : " + title + "mon nom de variable est : " + dataName);
+    modifyGame(modifData, dataName) {
+      console.log("je suis la fonction modifyGame et je suis déclenché ! Et mon titre est : " + this.title + " ma valeur est : "+ modifData+ " mon nom est "+ dataName );
       this.message = "";
       this.successful = false;
       this.loading = true;
-      GameService.modifyGame(title, modifData, dataName).then(
+      GameService.modifyGame(this.title, modifData, dataName).then(
         (data) => {
           this.submitted = true;
           this.successful = true;
