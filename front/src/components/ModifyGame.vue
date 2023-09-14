@@ -30,7 +30,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="description"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(description, 'description')">Valider</button>
           </div>
           <ErrorMessage name="description" class="text-danger" />
         </Form>
@@ -53,7 +53,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="plateforms"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(plateforms, 'plateforms')">Valider</button>
           </div>
           <ErrorMessage name="plateforms" class="text-danger" />
         </Form>
@@ -74,7 +74,7 @@
               type="number"
               class="form-control bg-warning"
               v-model="priority"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(priority, 'priority')">Valider</button>
           </div>
           <ErrorMessage name="priority" class="text-danger" />
         </Form>
@@ -95,7 +95,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="gameEngine"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(gameEngine, 'gameEngine')">Valider</button>
           </div>
           <ErrorMessage name="gameEngine" class="text-danger" />
         </Form>
@@ -116,7 +116,7 @@
               type="date"
               class="form-control bg-warning"
               v-model="releaseDate"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(releaseDate, 'releaseDate')">Valider</button>
           </div>
           <ErrorMessage name="releaseDate" class="text-danger" />
         </Form>
@@ -137,7 +137,7 @@
               type="number"
               class="form-control bg-warning"
               v-model="budget"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(budget, 'budget')">Valider</button>
           </div>
           <ErrorMessage name="budget" class="text-danger" />
         </Form>
@@ -158,7 +158,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="status"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(status, 'status')">Valider</button>
           </div>
           <ErrorMessage name="status" class="text-danger" />
         </Form>
@@ -179,7 +179,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="typeOfGame"
-            /><button class="btn btn-success ms-2">Valider</button>
+            /><button class="btn btn-success ms-2 " @click="modifyGame(typeOfGame, 'typeOfGame')">Valider</button>
           </div>
           <ErrorMessage name="typeOfGame" class="text-danger" />
         </Form>
@@ -200,7 +200,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="numberOfPlayers"
-            /><button type="button" class="btn btn-success ms-2" @click.prevent="modifyGame(numberOfPlayers, 'numberOfPlayers')">Valider</button>
+            /><button type="button" class="btn btn-success ms-2" @click="modifyGame(numberOfPlayers, 'numberOfPlayers')">Valider</button>
           </div>
           <ErrorMessage name="numberOfPlayers" class="text-danger" />
         </Form>
@@ -324,15 +324,6 @@ export default {
           this.successful = true;
           this.loading = false;
           this.message = data.message;
-          this.description = data.description;
-          this.studioName = "Gamesoft";
-          this.plateforms = data.plateforms;
-          this.priority = data.priority;
-          this.gameEngine = data.gameEngine;
-          this.budget = data.budget;
-          this.status = data.status;
-          this.typeOfGame = data.typeOfGame;
-          this.numberOfPlayers = data.numberOfPlayers;
           setTimeout(() => {
             this.message = "";
           }, 5000);

@@ -60,7 +60,6 @@ exports.getIncomingGamesList = (req, res) => {
 exports.getGameData = (req, res) => {
 
     const title = req.params.title
-    let gameData = []
 
     Game.findOne({
         where : {
@@ -77,5 +76,33 @@ exports.getGameData = (req, res) => {
                 data: game
             })
         }
+    })
+}
+
+exports.modifyGame = (req, res) => {
+    const title = req.params.title
+    const data = req.body
+    
+    console.log("titre : "+title+", data : "+data)
+
+    Game.update((data), {
+        where : {
+            title: title
+        }
+    }).then(num => {
+        if (num == 1) {
+            res.send({
+                message: `La donnée a été correctement modifiée !`
+            })
+        } else {
+            res.send({
+                message: "La donnée à modifier est introuvable"
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Une erreur s'est produite lors de la modification de donnée"
+        })
     })
 }
