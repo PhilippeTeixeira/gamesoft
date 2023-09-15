@@ -30,9 +30,14 @@ module.exports = function(app) {
         [authJwt.verifyToken, ( authJwt.isAdmin || authJwt.isProducer )],
         controller.getGameData
     )
-    app.post(
+    app.put(
         "/api/game/modifygame/:title",
         [authJwt.verifyToken, ( authJwt.isAdmin || authJwt.isProducer )],
         controller.modifyGame
+    )
+    app.post(
+        "/api/game/deletegame",
+        [authJwt.verifyToken, authJwt.isAdmin ],
+        controller.deleteGame
     )
 }

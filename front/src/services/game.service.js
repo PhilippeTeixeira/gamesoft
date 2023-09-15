@@ -47,7 +47,14 @@ class GameService {
         data[dataName] = modifData
         console.log(data)
         return axios
-        .post(API_URL + "modifygame/" + title , data, { headers: authHeader()})
+        .put(API_URL + "modifygame/" + title , data, { headers: authHeader()})
+        .then(response => {
+            return response
+        })
+    }
+    deleteGame(title){
+        return axios
+        .post(API_URL + "deletegame/", { title: title }, { headers: authHeader()})
         .then(response => {
             return response
         })

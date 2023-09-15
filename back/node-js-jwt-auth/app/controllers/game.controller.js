@@ -106,3 +106,28 @@ exports.modifyGame = (req, res) => {
         })
     })
 }
+
+exports.deleteGame = (req, res) => {
+    const title = req.body.title
+    console.log(title)
+    Game.destroy({
+        where : {
+            title: title
+        }
+    }).then(num => {
+        if (num == 1) {
+            res.send({
+                message: `Le jeu ${title} a bien été supprimé !`
+            })
+        } else {
+            res.send({
+                message: `Le jeu ${title} est introuvable !`
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Une erreur s'est produite lors de la suppression du jeu."
+        })
+    })
+}
