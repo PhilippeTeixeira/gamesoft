@@ -1,5 +1,13 @@
 <template>
   <div class="d-flex justify-content-center">
+    <div class="container d-flex justify-content-center position-fixed message-response z-3 col-8">
+        <div class="row">
+          <div v-if="message" class="alert rounded d-flex justify-content-between align-items-center" :class="successful ? 'alert-success' : 'alert-danger'">
+        <div class="align-self-center"><p class="fw-bold">{{ message }}</p></div>
+        <div><button class="btn p-0 m-0" @click="message=false"><i class="bi bi-x fw-bold" style="font-size: 30px;"></i></button></div>
+      </div>
+        </div>
+    </div>
     <div
       id="modifygameform"
       class="bg-light text-dark col-10 col-md-8 p-4 rounded"
@@ -30,7 +38,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="description"
-            /><button class="btn btn-success ms-2" @click="modifyGame(description, 'description')">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(description, 'description') ; modifyDescription=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="description" class="text-danger" />
         </Form>
@@ -53,7 +61,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="plateforms"
-            /><button class="btn btn-success ms-2" @click="modifyGame(plateforms, 'plateforms')">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(plateforms, 'plateforms') ; modifyPlateforms=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="plateforms" class="text-danger" />
         </Form>
@@ -74,7 +82,7 @@
               type="number"
               class="form-control bg-warning"
               v-model="priority"
-            /><button class="btn btn-success ms-2" @click="modifyGame(priority, 'priority')">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(priority, 'priority') ; modifyPriority=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="priority" class="text-danger" />
         </Form>
@@ -95,7 +103,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="gameEngine"
-            /><button class="btn btn-success ms-2" @click="modifyGame(gameEngine, 'gameEngine')">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(gameEngine, 'gameEngine') ; modifyGameEngine=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="gameEngine" class="text-danger" />
         </Form>
@@ -116,7 +124,7 @@
               type="date"
               class="form-control bg-warning"
               v-model="releaseDate"
-            /><button class="btn btn-success ms-2" @click="modifyGame(releaseDate, 'releaseDate')">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(releaseDate, 'releaseDate') ; modifyRealeaseDate=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="releaseDate" class="text-danger" />
         </Form>
@@ -137,7 +145,7 @@
               type="number"
               class="form-control bg-warning"
               v-model="budget"
-            /><button class="btn btn-success ms-2" @click="modifyGame(budget, 'budget')">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(budget, 'budget') ; modifyBudget=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="budget" class="text-danger" />
         </Form>
@@ -158,7 +166,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="status"
-            /><button class="btn btn-success ms-2" @click="modifyGame(status, 'status')">Valider</button>
+            /><button class="btn btn-success ms-2" @click="modifyGame(status, 'status') ; modifyStatus=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="status" class="text-danger" />
         </Form>
@@ -179,7 +187,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="typeOfGame"
-            /><button class="btn btn-success ms-2 " @click="modifyGame(typeOfGame, 'typeOfGame')">Valider</button>
+            /><button class="btn btn-success ms-2 " @click="modifyGame(typeOfGame, 'typeOfGame') ; modifyTypeOfGame=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="typeOfGame" class="text-danger" />
         </Form>
@@ -200,7 +208,7 @@
               type="text"
               class="form-control bg-warning"
               v-model="numberOfPlayers"
-            /><button type="button" class="btn btn-success ms-2" @click="modifyGame(numberOfPlayers, 'numberOfPlayers')">Valider</button>
+            /><button type="button" class="btn btn-success ms-2" @click="modifyGame(numberOfPlayers, 'numberOfPlayers'); modifyNumberOfPlayers=false; focusField = false">Valider</button>
           </div>
           <ErrorMessage name="numberOfPlayers" class="text-danger" />
         </Form>
@@ -210,8 +218,10 @@
           <button class="btn btn-outline-dark m-2">Revenir à la liste des jeux</button>
         </router-link>
       </div>
+
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -319,11 +329,11 @@ export default {
       this.successful = false;
       this.loading = true;
       GameService.modifyGame(this.title, modifData, dataName).then(
-        (data) => {
+        (response) => {
           this.submitted = true;
           this.successful = true;
           this.loading = false;
-          this.message = data.message;
+          this.message = response.data.message
           setTimeout(() => {
             this.message = "";
           }, 5000);
@@ -342,3 +352,8 @@ export default {
   },
 };
 </script>
+<style>
+.message-response {
+  bottom: 50px;
+}
+</style>
