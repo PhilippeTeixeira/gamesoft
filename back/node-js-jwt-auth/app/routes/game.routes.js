@@ -1,6 +1,7 @@
 const { verifyGame } = require("../middleware")
 const { authJwt } = require("../middleware")
 const controller = require("../controllers/game.controller")
+const fileController = require("../controllers/file.controller")
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -40,4 +41,7 @@ module.exports = function(app) {
         [authJwt.verifyToken, authJwt.isAdmin ],
         controller.deleteGame
     )
+    app.post("/upload", fileController.upload)
+    app.get("/files", fileController.getListFiles)
+    app.get("/files/:name", fileController.download)
 }

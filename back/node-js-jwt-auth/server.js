@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
-const multer = require("multer")
+
+global.__basedir = __dirname
 
 const app = express()
 
@@ -9,6 +10,10 @@ var corsOptions = {
 }
 
 app.use(cors(corsOptions))
+
+
+app.use(express.urlencoded({ extended: true }))
+
 
 // Analyse des requetes de content-type - application/json
 app.use(express.json())
@@ -21,40 +26,6 @@ app.get("/", (req, res) => {
     res.json({ message: "Bienvenue sur l'application Gamesoft" })
 })
 
-//Gestion des téléchargement d'images
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = ["image/jpeg", "image/jpg", "image/png"]
-    if (!allowedTypes.includes(file.mimetype)) {
-        const error = new Error("Incorrect file")
-        error.code = "INCORRECT_FILETYPE"
-        return cb(error, false)
-    }
-
-    cb(null, true)
-}
-
-const upload = multer({
-    dest: './uploads',
-    fileFilter,
-    limits: {
-        fileSize: 5000000
-    }
-})
-
-app.post('/upload', upload.single('file'), (req, res) => {
-    res.json({ file : req.file })
-})
-
-app.use((err, req, res, next) => {
-    if(err.code === "INCORRECT_FILETYPE") {
-        res.status(422).json({ error: "Only images are allowed" })
-        return
-    }
-    if(err.code === "LIMIT_FILE_SIZE") {
-        res.status(422).json({ error: "Allow file size is 5000KB" })
-        return
-    }
-})
 
 //routes
 require('./app/routes/auth.routes')(app)

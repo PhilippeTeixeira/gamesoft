@@ -10,7 +10,7 @@ class GameService {
             title: game.title,
             description: game.description,
             studioName: game.studioName,
-            pictures: game.title + ' 001',
+            pictures: './front/src/assets/'+game.title+'/'+game.title+'_001',
             plateforms: game.plateforms,
             priority: game.priority,
             score: game.score,

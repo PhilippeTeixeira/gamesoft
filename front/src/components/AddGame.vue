@@ -20,9 +20,71 @@
                                 <div class="form-group mb-4">
                                     <label for="title">Nom du jeu :</label>
                                     <Field name="title" id="titleInput" type="text" class="form-control"
-                                        placeholder="Titre" />
+                                        placeholder="Titre" v-model="gameTitle" />
                                     <ErrorMessage name="title" class="text-danger" />
                                 </div>
+
+                                <div class="form-group mb-4">
+                                    <label for="file">Choisissez une image pour ce jeu :</label>
+                                    <input
+                                    name="file"
+                                    id="fileInput"
+                                    type="file"
+                                    class="form-control mb-2"
+                                    accept="image/.jpg"
+                                    ref="file"
+                                    @change="selectFile()"
+                                    />
+                                    <ErrorMessage name="file" class="text-danger mb-2" />
+                                    <div v-if="currentFile" class="progress">
+                                        <div 
+                                            class="progress-bar progress-bar-info"
+                                            role="progressbar"
+                                            :aria-valuenow="progress"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            :style="{ width: progress + '%' }"
+                                        >
+                                            {{  progress }}%
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success m-2" :disabled="!selectedFiles" @click="upload">
+                                      Upload
+                                    </button>
+                                    <div v-if="message" class="alert alert-secondary mb-2" role="alert">
+                                        {{  message }}
+                                    </div> 
+                                   <div v-if="previewImage == true" class="card">
+                                        <p class="text-center mt-2">Apperçu des images pour ce jeu :</p>
+                                        <div class="container">
+                                            <div class="row justify-content-center bg-dark bg-opacity-75 p-2">
+                                                <div 
+                                                class="card p-2 col-3 m-2"
+                                                v-for="(file, index) in fileInfos"
+                                                :key="index"
+                                                >
+                                                    <p v-if="previewImage == false">Pas d'images pour ce jeu ! Veuillez en téléverser au moins une !</p>
+                                                    <img :src="file.url" class="preview" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <div class="card mt-3">
+                                        <div class="card-header">Liste des images</div>
+                                        <ul class="list-group list-group-flush">
+                                            <p v-if="previewImage == false" class="text-center text-danger">Pas d'images pour ce jeu ! Veuillez en téléverser au moins une !</p>
+                                            <li
+                                                class="list-group-item"
+                                                v-for="(file, index) in fileInfos"
+                                                :key="index"
+                                            >
+                                            <a :href="file.url">{{ file.name }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                                 <div class="form-group mb-4">
                                     <label for="description">Description :</label>
                                     <Field name="description" id="descriptionInput" type="text" class="form-control"
@@ -105,6 +167,7 @@
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import GameService from '../services/game.service'
 import * as yup from "yup";
+import UploadService from "../services/UploadFilesService"
 
 
 export default {
@@ -112,11 +175,12 @@ export default {
     components: {
         Form,
         Field,
-        ErrorMessage
+        ErrorMessage,
     },
     data() {
         const schema = yup.object().shape({
             title: yup.string().required("Veuillez entrer un titre !"),
+            image: yup.mixed().required("Veuillez ajouter une image pour ce jeu !"),
             description: yup.string().required("Veuillez remplir ce champ !"),
             plateforms: yup.string().required("Veuillez remplir ce champ !"),
             priority: yup.number().required("Veuillez remplir ce champ !"),
@@ -128,22 +192,38 @@ export default {
             numberOfPlayers: yup.string().required("Veuillez remplir ce champ !")
         })
         return {
+            gameTitle: "",
             submitted: false,
             successful: false,
             message: '',
             loading: false,
-            schema
+            schema,
+
+            selectedFiles: undefined,
+            currentFile: undefined,
+            previewImage: false,
+            counterFile: 1,
+
+            progress: 0,
+
+            fileInfos: [],
         }
     },
     computed: {
         currentUser() {
-            return this.$store.state.auth.user;
+            return this.$store.state.auth.user
         }
     },
     mounted() {
         if (!this.currentUser) {
-            this.$router.push('/signin');
+            this.$router.push('/signin')
         }
+        UploadService.getFiles().then((response) => {
+            this.fileInfos = response.data
+            if (this.fileInfos.length > 0) {
+                this.previewImage = true
+            }
+        })
     },
     methods: {
 
@@ -167,6 +247,7 @@ export default {
                     this.status = data.status
                     this.typeOfGame = data.typeOfGame
                     this.numberOfPlayers = data.numberOfPlayers
+
                     const form = document.getElementById("addgameform")
                     HTMLFormElement.prototype.reset.call(form)
                     this.$parent.refreshGamesList()
@@ -189,7 +270,54 @@ export default {
                 }
 
             )
-        }
+        },
+
+        selectFile() {
+            this.selectedFiles = this.$refs.file.files;
+            console.log("hello je suis dans la fonction selectFile() et ma variable selectedFiles vaut : "+this.selectedFiles)
+        },
+
+        upload() {
+            this.progress = 0;
+
+            this.currentFile = this.selectedFiles.item(0)
+            for (let file in this.selectedFiles) {
+                console.log(`${file}: ${this.selectedFiles[file].name}`)
+            }
+            console.log(this.currentFile)
+            if(this.gameTitle){
+                UploadService.upload(this.currentFile, event => {
+                    this.progress = Math.round((100 * event.loaded) / event.total);
+                }, this.gameTitle, this.counterFile)
+                    .then(response => {
+                    this.message = response.data.message;
+                    return UploadService.getFiles();
+                    })
+                    .then(files => {
+                    this.fileInfos = files.data;
+                    this.previewImage = true
+                    this.counterFile += 1
+                    })
+                    .catch(() => {
+                    this.progress = 0;
+                    this.message = "Could not upload the file!";
+                    this.currentFile = undefined;
+                    });
+            } else {
+                this.message = "Veuillez d'abord entrer un titre avant de téléverser une image"
+            }
+        },
     }
 };
 </script>
+
+<style>
+   .uploading-image{
+     display:flex;
+     height: 75%;
+     width: 75%;
+   }
+   .preview {
+    width: 100%;
+   }
+ </style>
