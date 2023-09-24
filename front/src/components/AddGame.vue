@@ -1,4 +1,23 @@
 <template>
+        <div v-if="showPopperValidTitle && gameTitle" class="z-3 d-flex justify-content-center align-items-center position-fixed popper-delete vh-100 vw-100">
+        <div class="container card h-auto w-25 col-6">
+            <div class="row">
+                <h2 class="text-center">ATTENTION</h2>
+            </div>
+            <div class="row p-2">
+                
+                <p>Vous êtes sur le point de téléverser des images pour ce jeu. Cette action implique que le titre du jeu que vous avez entré
+                est définitif. Êtes-vous certain de vouloir enregistrer le titre suivant : <span class="text-danger">{{ gameTitle }}</span> ?</p>
+                <p class="text-danger text-center">/!\ Vous ne pourrez plus changer le titre du jeu après ce choix ! /!\</p>
+            </div>
+            <div class="row d-flex ">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-success m-2" @click="validTitle=true; showPopperValidTitle=false; upload()">Valider</button>
+                    <button class="btn btn-danger m-2" @click="validTitle=false; showPopperValidTitle=false">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row d-flex  mb-2 text-dark">
             <h2 class="text-center">Liste des jeux</h2>
@@ -20,7 +39,7 @@
                                 <div class="form-group mb-4">
                                     <label for="title">Nom du jeu :</label>
                                     <Field name="title" id="titleInput" type="text" class="form-control"
-                                        placeholder="Titre" v-model="gameTitle" />
+                                        placeholder="Titre" v-model="gameTitle" :disabled="validTitle"/>
                                     <ErrorMessage name="title" class="text-danger" />
                                 </div>
 
@@ -64,6 +83,7 @@
                                                 :key="index"
                                                 >
                                                     <p v-if="previewImage == false">Pas d'images pour ce jeu ! Veuillez en téléverser au moins une !</p>
+                                                    <h6 class="text-center card-header text-primary">{{ file.name }}</h6>
                                                     <img :src="file.url" class="preview" alt="" />
                                                 </div>
                                             </div>
@@ -203,6 +223,8 @@ export default {
             currentFile: undefined,
             previewImage: false,
             counterFile: 1,
+            validTitle: false,
+            showPopperValidTitle: false,
 
             progress: 0,
 
@@ -218,12 +240,14 @@ export default {
         if (!this.currentUser) {
             this.$router.push('/signin')
         }
-        UploadService.getFiles().then((response) => {
-            this.fileInfos = response.data
-            if (this.fileInfos.length > 0) {
-                this.previewImage = true
-            }
-        })
+        if (this.gameTitle) {
+            UploadService.getFiles().then((response) => {
+                this.fileInfos = response.data
+                if (this.fileInfos.length > 0) {
+                    this.previewImage = true
+                }
+            })
+        }
     },
     methods: {
 
@@ -285,7 +309,8 @@ export default {
                 console.log(`${file}: ${this.selectedFiles[file].name}`)
             }
             console.log(this.currentFile)
-            if(this.gameTitle){
+            this.confirmTitle()
+            if(this.gameTitle && this.validTitle){
                 UploadService.upload(this.currentFile, event => {
                     this.progress = Math.round((100 * event.loaded) / event.total);
                 }, this.gameTitle, this.counterFile)
@@ -307,6 +332,12 @@ export default {
                 this.message = "Veuillez d'abord entrer un titre avant de téléverser une image"
             }
         },
+
+        confirmTitle() {
+            if(!this.validTitle) {
+                this.showPopperValidTitle = true
+            }
+        }
     }
 };
 </script>
