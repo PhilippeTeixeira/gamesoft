@@ -11,6 +11,7 @@ const upload = async (req, res) => {
         }
 
         res.status(200).send({
+            name: req.file.originalname,
             message: "Le fichier a été envoyé et renommé avec succès: " +req.file.originalname
         })
     } catch (err) {
@@ -26,8 +27,9 @@ const upload = async (req, res) => {
 }
 
 const getListFiles = (req, res) => {
-    const directoryPath = __basedir + "/resources/static/assets/uploads/"
-
+    const directoryPath = __basedir + "/resources/static/assets/uploads/" + req.params.gameTitle +"/"
+    console.log("Directory path = "+directoryPath)
+    console.log(req.params.fileName)
     fs.readdir(directoryPath, function(err, files) {
         if (err) {
             res.status(500).send({
@@ -40,7 +42,7 @@ const getListFiles = (req, res) => {
         files.forEach((file) => {
             fileInfos.push({
                 name: file,
-                url: baseUrl + file
+                url: baseUrl + req.params.gameTitle + "/" + file
             })
         })
 
@@ -49,17 +51,21 @@ const getListFiles = (req, res) => {
 }
 
 const download = (req, res) => {
+    const folder = req.params.gameTitle
     const fileName = req.params.name
-    const directoryPath = __basedir + "/resources/static/assets/uploads/"
+    const directoryPath = __basedir + "ressources/static/assets/upload/"+folder+"/"
+    console.log("je passe par download")
 
     res.download(directoryPath + fileName, fileName, (err) => {
-        if (err) {
+        if(err) {
             res.status(500).send({
-                message: "Impossible de télécharger le fichier. " +err
+                message: "Impossible de télécharger le fichier. " + err
             })
         }
     })
 }
+
+
 
 module.exports = {
     upload,

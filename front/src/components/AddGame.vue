@@ -241,7 +241,7 @@ export default {
             this.$router.push('/signin')
         }
         if (this.gameTitle) {
-            UploadService.getFiles().then((response) => {
+            UploadService.getFiles(this.gameTitle).then((response) => {
                 this.fileInfos = response.data
                 if (this.fileInfos.length > 0) {
                     this.previewImage = true
@@ -316,7 +316,7 @@ export default {
                 }, this.gameTitle, this.counterFile)
                     .then(response => {
                     this.message = response.data.message;
-                    return UploadService.getFiles();
+                    return UploadService.getFiles(this.gameTitle, response.data.name);
                     })
                     .then(files => {
                     this.fileInfos = files.data;

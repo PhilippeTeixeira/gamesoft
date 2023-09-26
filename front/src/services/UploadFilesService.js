@@ -1,4 +1,8 @@
 import http from "../http-common"
+import axios from 'axios'
+import authHeader from "./auth-header"
+
+const API_URL = 'http://localhost:8080/'
 
 class UploadFilesService {
     upload(file, onUploadProgress, fileName, counterFile) {
@@ -6,16 +10,14 @@ class UploadFilesService {
 
         formData.append("file", file, fileName+"_"+counterFile+".jpg")
 
-        return http.post("/upload", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            },
+        return axios.post(API_URL + "upload", formData, {
+            headers: authHeader(),
             onUploadProgress
         })
     }
 
-    getFiles() {
-        return http.get("/files")
+    getFiles(gameTitle, fileName) {
+        return http.get("/files/"+ gameTitle+"/"+fileName)
     }
 }
 
