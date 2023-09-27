@@ -42,6 +42,6 @@ module.exports = function(app) {
         controller.deleteGame
     )
     app.post("/upload", fileController.upload)
-    app.get("/files/:gameTitle/:name", fileController.getListFiles)
+    app.get("/files/:gameTitle", fileController.getListFiles)
     app.get("/files/:gameTitle/:name", fileController.download)
 }

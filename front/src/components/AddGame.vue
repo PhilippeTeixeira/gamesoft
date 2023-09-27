@@ -67,7 +67,7 @@
                                             {{  progress }}%
                                         </div>
                                     </div>
-                                    <button class="btn btn-success m-2" :disabled="!selectedFiles" @click="upload">
+                                    <button type="button" class="btn btn-success m-2" :disabled="!selectedFiles" @click="upload">
                                       Upload
                                     </button>
                                     <div v-if="message" class="alert alert-secondary mb-2" role="alert">
@@ -200,7 +200,6 @@ export default {
     data() {
         const schema = yup.object().shape({
             title: yup.string().required("Veuillez entrer un titre !"),
-            image: yup.mixed().required("Veuillez ajouter une image pour ce jeu !"),
             description: yup.string().required("Veuillez remplir ce champ !"),
             plateforms: yup.string().required("Veuillez remplir ce champ !"),
             priority: yup.number().required("Veuillez remplir ce champ !"),
@@ -218,6 +217,7 @@ export default {
             message: '',
             loading: false,
             schema,
+            pictures: [],
 
             selectedFiles: undefined,
             currentFile: undefined,
@@ -262,6 +262,7 @@ export default {
                     this.loading = false
                     this.message = data.message
                     this.title = data.title
+                    this.pictures = data.pictures
                     this.description = data.description
                     this.studioName = 'Gamesoft'
                     this.plateforms = data.plateforms
@@ -322,6 +323,11 @@ export default {
                     this.fileInfos = files.data;
                     this.previewImage = true
                     this.counterFile += 1
+                    for (let file in files.data) {
+                        this.pictures.push(file.data.name)
+                        console.log(file.data.name)
+                    }
+                    console.log("Je suis dans la fonction upload et la variable pictures vaut : " + this.pictures)
                     })
                     .catch(() => {
                     this.progress = 0;

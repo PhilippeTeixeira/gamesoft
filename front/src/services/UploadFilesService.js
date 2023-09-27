@@ -8,7 +8,10 @@ class UploadFilesService {
     upload(file, onUploadProgress, fileName, counterFile) {
         let formData = new FormData()
 
-        formData.append("file", file, fileName+"_"+counterFile+".jpg")
+        let fixedString
+        fixedString = fileName.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+
+        formData.append("file", file, fixedString+"_"+counterFile+".jpg")
 
         return axios.post(API_URL + "upload", formData, {
             headers: authHeader(),
@@ -16,8 +19,11 @@ class UploadFilesService {
         })
     }
 
-    getFiles(gameTitle, fileName) {
-        return http.get("/files/"+ gameTitle+"/"+fileName)
+    getFiles(gameTitle) {
+        let fixedString
+        fixedString = gameTitle.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        console.log(fixedString)
+        return http.get("/files/"+ fixedString)
     }
 }
 

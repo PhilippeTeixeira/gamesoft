@@ -6,6 +6,8 @@ const upload = async (req, res) => {
     try {
         await uploadFile(req, res)
 
+        console.log(req.file.originalname)
+
         if (req.file == undefined) {
             return res.status(400).send({ message: "Please upload a file!" })
         }
@@ -45,7 +47,7 @@ const getListFiles = (req, res) => {
                 url: baseUrl + req.params.gameTitle + "/" + file
             })
         })
-
+        console.log("je passe par getListFiles")
         res.status(200).send(fileInfos)
     })
 }
@@ -53,7 +55,7 @@ const getListFiles = (req, res) => {
 const download = (req, res) => {
     const folder = req.params.gameTitle
     const fileName = req.params.name
-    const directoryPath = __basedir + "ressources/static/assets/upload/"+folder+"/"
+    const directoryPath = __basedir + "/resources/static/assets/uploads/"+folder+"/"
     console.log("je passe par download")
 
     res.download(directoryPath + fileName, fileName, (err) => {
