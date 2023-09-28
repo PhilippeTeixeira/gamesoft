@@ -4,13 +4,13 @@ import authHeader from './auth-header'
 const API_URL = 'http://localhost:8080/api/game/'
 
 class GameService {
-    addGame(game) {
+    addGame(game, studioName, pictures) {
         return axios
         .post(API_URL + 'addgame', {
             title: game.title,
             description: game.description,
-            studioName: game.studioName,
-            pictures: game.pictures,
+            studioName: studioName,
+            pictures: JSON.stringify(pictures),
             plateforms: game.plateforms,
             priority: game.priority,
             score: game.score,

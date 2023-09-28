@@ -98,6 +98,7 @@
                                                 class="list-group-item"
                                                 v-for="(file, index) in fileInfos"
                                                 :key="index"
+                                                ref="listImage"
                                             >
                                             <a :href="file.url">{{ file.name }}</a>
                                             </li>
@@ -208,7 +209,7 @@ export default {
             budget: yup.number().required("Veuillez remplir ce champ !"),
             status: yup.string().required("Veuillez remplir ce champ !"),
             typeOfGame: yup.string().required("Veuillez remplir ce champ !"),
-            numberOfPlayers: yup.string().required("Veuillez remplir ce champ !")
+            numberOfPlayers: yup.string().required("Veuillez remplir ce champ !"),
         })
         return {
             gameTitle: "",
@@ -218,6 +219,7 @@ export default {
             loading: false,
             schema,
             pictures: [],
+            studioName: 'Gamesoft',
 
             selectedFiles: undefined,
             currentFile: undefined,
@@ -255,7 +257,7 @@ export default {
             this.message = ''
             this.successful = false
             this.loading = true
-            GameService.addGame(game).then(
+            GameService.addGame(game, this.studioName, this.pictures).then(
                 data => {
                     this.submitted = true
                     this.successful = true
@@ -299,7 +301,6 @@ export default {
 
         selectFile() {
             this.selectedFiles = this.$refs.file.files;
-            console.log("hello je suis dans la fonction selectFile() et ma variable selectedFiles vaut : "+this.selectedFiles)
         },
 
         upload() {
@@ -309,25 +310,21 @@ export default {
             for (let file in this.selectedFiles) {
                 console.log(`${file}: ${this.selectedFiles[file].name}`)
             }
-            console.log(this.currentFile)
             this.confirmTitle()
             if(this.gameTitle && this.validTitle){
                 UploadService.upload(this.currentFile, event => {
                     this.progress = Math.round((100 * event.loaded) / event.total);
                 }, this.gameTitle, this.counterFile)
                     .then(response => {
+                    this.pictures.push(response.data.name)
                     this.message = response.data.message;
+                    console.log("le this.pictures vaut : " + this.pictures)
                     return UploadService.getFiles(this.gameTitle, response.data.name);
                     })
                     .then(files => {
                     this.fileInfos = files.data;
                     this.previewImage = true
                     this.counterFile += 1
-                    for (let file in files.data) {
-                        this.pictures.push(file.data.name)
-                        console.log(file.data.name)
-                    }
-                    console.log("Je suis dans la fonction upload et la variable pictures vaut : " + this.pictures)
                     })
                     .catch(() => {
                     this.progress = 0;
@@ -343,7 +340,7 @@ export default {
             if(!this.validTitle) {
                 this.showPopperValidTitle = true
             }
-        }
+        },
     }
 };
 </script>
