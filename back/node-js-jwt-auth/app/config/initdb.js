@@ -186,7 +186,7 @@ exports.initial = () => {
         numberOfPlayers: "1"
     })
     Game.create({
-        title: "Divination: Original Sin",
+        title: "Divination Original Sin",
         description: "Faire de la divination est un péché !",
         studioName: "Gamesoft",
         pictures: "./front/src/assets/demonio_background.jpg",

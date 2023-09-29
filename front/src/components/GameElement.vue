@@ -1,7 +1,7 @@
 <template>
     <div class="card card-anim bg-dark text-white p-2 col-3 m-2">
         <h5 class="card-title">{{ title }}</h5>
-        <img class="card-img-top p-2 pb-0" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+        <img class="card-img-top p-2 pb-0" :src="'http://localhost:8080/files/'+title+'/'+title+'_1.jpg'" alt="image du jeu">
         <p class="status"><span class="led_status st_orange" v-if="status == 'En développement'"> &#x2981; </span><span class="led_status st_green" v-else-if="status == 'Disponible'"> &#x2981; </span>{{ status }}</p>
         <p>{{ description }}</p>
     </div>

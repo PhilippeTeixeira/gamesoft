@@ -25,6 +25,10 @@ class UploadFilesService {
         console.log(fixedString)
         return http.get("/files/"+ fixedString)
     }
+
+    getPictures(title, pictureName) {
+        return http.get("/files/"+title+"/"+pictureName)
+    }
 }
 
 export default new UploadFilesService()

@@ -66,7 +66,7 @@
       </div>
       <div class="row justify-content-center bg-dark bg-opacity-75 p-4">
         <GameElement v-for="element in elements" :key="element.name" :title="element.title"
-          :description="element.description" :status="element.status" />
+          :description="element.description" :status="element.status"/>
       </div>
     </div>
     <FooterComponent />
