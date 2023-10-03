@@ -34,10 +34,10 @@
                 <div data-bs-toggle="dropdown" class="dropdown-toggle user-action d-flex align-items-center btn btn-outline-light ps-2 pe-2 pt-0 pb-1" type="button"><i class="bi bi-person-circle rounded-circle me-2" style="font-size: 2rem;"></i> {{ this.currentUser.username }}
                   <b class="caret"></b></div>
                 <ul class="dropdown-menu text-center">
-                  <router-link :to="{ name: 'AccountPage', params: { setCurrentTab: 'AccountView' } }"><li class="list-group-item"><i class="fa fa-user-o"></i> Mon compte</li></router-link>
+                  <router-link :to="{ name: 'AccountPage', params: { setCurrentTab: 'AccountView' } }"><li class="list-group-item list-unstyled m-2 border-bottom pb-2"><i class="bi bi-house"></i> Mon compte</li></router-link>
                   <li class="divider"></li>
                   <li><a href="#"><button class="btn btn-danger text-white" @click.prevent="UserLogout"><i
-                          class="material-icons">&#xE8AC;</i> Logout</button></a></li>
+                    class="bi bi-escape"></i> Logout</button></a></li>
                 </ul>
               </li>
             </div>
@@ -88,5 +88,12 @@ export default {
 
 .nav-item:hover {
   border-bottom: solid whitesmoke;
+}
+
+.list-unstyled {
+  font-style: none;
+  list-style: none;
+  text-decoration: none;
+  color: black;
 }
 </style>

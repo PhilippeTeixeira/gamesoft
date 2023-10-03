@@ -94,7 +94,7 @@
               <div class="col-12 d-flex justify-content-center">
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Demonio</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Demonio/Demonio_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -102,7 +102,7 @@
                 </div>
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Neverwinter Days</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Neverwinter Days/Neverwinter Days_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -110,7 +110,7 @@
                 </div>
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Baladur's Doors</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Baladur's Doors/Baladur's Doors_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -122,7 +122,7 @@
               <div class="col-12 d-flex justify-content-center">
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Skygrim</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Skygrim/Skygrim_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -130,7 +130,7 @@
                 </div>
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">The Sorcerer</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/The Sorcerer/The Sorcerer_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -138,7 +138,7 @@
                 </div>
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Fall Up</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Fallup/Fallup_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -150,7 +150,7 @@
               <div class="col-12 d-flex justify-content-center">
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Conqueror's sword</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Conqueror's Sword/Conqueror's Sword_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -158,7 +158,7 @@
                 </div>
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Divination: original sin</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Divination Original Sin/Divination Original Sin_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
@@ -166,7 +166,7 @@
                 </div>
                 <div class="card bg-dark text-white p-2 col-3 m-2">
                   <h5 class="card-title">Tempest Dale</h5>
-                  <img class="card-img-top p-2" src="../assets/demonio_background.jpg" alt="image jeu Demonio">
+                  <img class="card-img-top p-2" src="http://localhost:8080/files/Tempest Dale/Tempest Dale_1.jpg" alt="image jeu Demonio">
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ut, quae commodi maxime consequuntur
                     est
                     eos
