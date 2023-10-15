@@ -36,7 +36,6 @@
 <script>
 import GameService from "../services/game.service";
 
-
 export default {
     props: ['title', 'releaseDate', 'score'],
     data() {

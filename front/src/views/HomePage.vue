@@ -23,7 +23,7 @@
 
               <div class="accordion accordion-flush" id="accordionExample">
                 <div class="accordion-item bg-transparent">
-                  <div id="collapseOne" class="accordion-collapse collapse collapse" aria-labelledby="headingOne"
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body text-white p-0">
                       <h6 class="text-primary">Une immersion totale dans un univers médiéval fantastique :</h6>

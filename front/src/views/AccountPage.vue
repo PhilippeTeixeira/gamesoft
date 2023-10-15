@@ -46,7 +46,6 @@ export default {
         if (!this.currentUser) {
             this.$router.push('/signin');
         }
-        console.log("Je suis dans AccountPage et ma valeur est : " + this.setCurrentTab )
     }
 };
 </script>

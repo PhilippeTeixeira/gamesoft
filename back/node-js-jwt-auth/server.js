@@ -39,16 +39,13 @@ app.listen(PORT, () => {
 })
 
 const db = require("./app/models")
-const Role = db.role
 
 // pour la production : remplacer ci-dessous par db.sequelize.sync()
-const Dbinit = require("./app/config/initdb")
-const User = db.user
-const Game = db.game
-const Op = db.Sequelize.Op
+const dbinit = require("./app/config/initdb")
+
 db.sequelize.sync({force: true}).then(() => {
     console.log('Efface et resynchronise la BDD')
-    Dbinit.initial()
+    dbinit.initial()
 })
 
-var bcrypt = require("bcryptjs")
+

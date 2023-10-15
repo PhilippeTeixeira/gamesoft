@@ -2,7 +2,6 @@ const db = require("../models")
 const Role = db.role 
 const User = db.user 
 const Game = db.game 
-const Op = db.Sequelize.Op
 
 var bcrypt = require("bcryptjs")
 

@@ -64,7 +64,6 @@ export default {
         if (!this.currentUser) {
             this.$router.push('/signin');
         }
-        console.log(this.setCurrentTab)
         if (this.setCurrentTab) {
             let tab 
             if(this.setCurrentTab == 'GamesList') {
@@ -75,7 +74,6 @@ export default {
                 tab = '1'
                 this.currentTab = 'AccountView'
             }
-            console.log("ma tab est :" +tab+" et mon currentTab est : " +this.currentTab)
             this.toggleTab(tab)
         }
     },
